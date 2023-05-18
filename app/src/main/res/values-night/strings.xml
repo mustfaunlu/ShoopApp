@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="add_to_cart">Add to Cart</string>
+    <string name="my_shopping_list">My Shopping List</string>
+    <string name="added_to_cart">Added to cart</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="error">Error</string>
+</resources>
