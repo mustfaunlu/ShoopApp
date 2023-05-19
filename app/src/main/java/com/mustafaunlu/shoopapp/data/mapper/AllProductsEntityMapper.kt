@@ -1,7 +1,6 @@
 package com.mustafaunlu.shoopapp.data.mapper
 
 import com.mustafaunlu.shoopapp.data.dto.Product
-
 import com.mustafaunlu.shoopapp.domain.entity.AllProductsEntity
 import com.mustafaunlu.shoopapp.domain.mapper.ProductListMapper
 import javax.inject.Inject

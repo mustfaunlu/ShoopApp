@@ -7,4 +7,7 @@
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="error">Error</string>
+    <string name="products_list_appbar_title">Products List</string>
+    <string name="product_detail_appbar_title">Product Detail</string>
+    <string name="shopping_list_appbar_title">Your Shopping List</string>
 </resources>

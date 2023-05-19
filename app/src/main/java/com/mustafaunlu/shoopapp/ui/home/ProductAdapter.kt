@@ -1,51 +1,51 @@
 package com.mustafaunlu.shoopapp.ui.home
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.ImageView
-import android.widget.TextView
-import com.mustafaunlu.shoopapp.R
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.mustafaunlu.shoopapp.common.AllProductsUiData
+import com.mustafaunlu.shoopapp.databinding.ProductItemBinding
 import com.mustafaunlu.shoopapp.utils.loadImage
 
 class ProductAdapter(
-    context: Context,
-    resource: Int,
-    objects: List<AllProductsUiData>,
-    private val onItemClicked: (AllProductsUiData) -> Unit,
-) : ArrayAdapter<AllProductsUiData>(context, resource, objects) {
+    private val onItemClicked: (Int) -> Unit,
+) : ListAdapter<AllProductsUiData, ProductAdapter.ProductViewHolder>(ProductDiffCallback()) {
 
-    @SuppressLint("SetTextI18n")
-    override fun getView(
-        position: Int,
-        convertView: View?,
-        parent: ViewGroup,
-    ): View {
-        var view = convertView
-        if (view == null) {
-            val inflater = LayoutInflater.from(context)
-            view = inflater.inflate(R.layout.product_item, parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
+        val binding = ProductItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ProductViewHolder(binding)
+    }
+
+    override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
+        holder.bind(currentList[position])
+    }
+
+    inner class ProductViewHolder(private val binding: ProductItemBinding) : RecyclerView.ViewHolder(binding.root) {
+
+        @SuppressLint("SetTextI18n")
+        fun bind(product: AllProductsUiData) {
+            binding.apply {
+                productTitle.text = product.title
+                productPrice.text = "${product.price} TL"
+                productDescription.text = product.description
+                productImg.loadImage(product.imageUrl)
+            }
+            binding.root.setOnClickListener {
+                onItemClicked(product.id)
+            }
+        }
+    }
+
+    private class ProductDiffCallback : DiffUtil.ItemCallback<AllProductsUiData>() {
+        override fun areItemsTheSame(oldItem: AllProductsUiData, newItem: AllProductsUiData): Boolean {
+            return oldItem.id == newItem.id
         }
 
-        val product = getItem(position)
-        val productImage = view!!.findViewById<ImageView>(R.id.product_img)
-        val productNameTextView = view!!.findViewById<TextView>(R.id.product_title)
-        val productDescription = view!!.findViewById<TextView>(R.id.product_description)
-        val productPriceTextView = view!!.findViewById<TextView>(R.id.product_price)
-
-        productNameTextView.text = product?.title
-        productPriceTextView.text = "${product?.price} TL"
-        productDescription.text = product?.description
-        productImage.loadImage(product!!.imageUrl)
-
-        view.setOnClickListener {
-            onItemClicked(product)
+        override fun areContentsTheSame(oldItem: AllProductsUiData, newItem: AllProductsUiData): Boolean {
+            return oldItem == newItem
         }
-
-        return view
     }
 }

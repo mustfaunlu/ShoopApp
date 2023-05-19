@@ -8,7 +8,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.mustafaunlu.shoopapp.R
 import com.mustafaunlu.shoopapp.common.ScreenState
 import com.mustafaunlu.shoopapp.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,13 +36,10 @@ class HomeFragment : Fragment() {
                 is ScreenState.Loading -> {
                 }
                 is ScreenState.Success -> {
-                    binding.productListview.adapter = ProductAdapter(
-                        requireContext(),
-                        R.layout.product_item,
-                        it.uiData,
-                    ) {
-                        navigateToProductDetail(it.id)
+                    binding.productRv.adapter = ProductAdapter { productId ->
+                        navigateToProductDetail(productId)
                     }
+                    (binding.productRv.adapter as ProductAdapter).submitList(it.uiData)
                 }
             }
         }

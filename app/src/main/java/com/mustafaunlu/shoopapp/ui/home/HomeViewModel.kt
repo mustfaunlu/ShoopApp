@@ -20,7 +20,7 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val getAllProductsUseCase: GetAllProductsUseCase,
     private val categoryUseCase: CategoryUseCase,
-    private val mapper: ProductListMapper<AllProductsEntity, AllProductsUiData>
+    private val mapper: ProductListMapper<AllProductsEntity, AllProductsUiData>,
 ) :
     ViewModel() {
     private val _products = MutableLiveData<ScreenState<List<AllProductsUiData>>>()

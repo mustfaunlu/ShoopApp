@@ -1,46 +1,44 @@
 package com.mustafaunlu.shoopapp.ui.shoppingList
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.TextView
-import com.mustafaunlu.shoopapp.R
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.mustafaunlu.shoopapp.common.UserCartUiData
+import com.mustafaunlu.shoopapp.databinding.ShoppingListItemBinding
 
-class ShoppingListAdapter(
-    context: Context,
-    resource: Int,
-    objects: List<UserCartUiData>,
-) : ArrayAdapter<UserCartUiData>(context, resource, objects) {
+class ShoppingListAdapter : ListAdapter<UserCartUiData, ShoppingListAdapter.ShoppingListViewHolder>(ShoppingListDiffCallback()) {
 
-    @SuppressLint("SetTextI18n")
-    override fun getView(
-        position: Int,
-        convertView: View?,
-        parent: ViewGroup,
-    ): View {
-        var view = convertView
-        if (view == null) {
-            val inflater = LayoutInflater.from(context)
-            view = inflater.inflate(R.layout.shopping_list_item, parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShoppingListViewHolder {
+        val binding = ShoppingListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ShoppingListViewHolder(binding)
+    }
+
+    override fun onBindViewHolder(holder: ShoppingListViewHolder, position: Int) {
+        holder.bind(getItem(position))
+    }
+
+    inner class ShoppingListViewHolder(private val binding: ShoppingListItemBinding) : RecyclerView.ViewHolder(binding.root) {
+        @SuppressLint("SetTextI18n")
+        fun bind(cart: UserCartUiData) {
+            binding.apply {
+                itemNameTextView.text = cart.title
+                itemPriceTextView.text = "${cart.price} TL"
+                itemId.text = "Product Id: ${cart.id}"
+                itemQuantity.text = "Quantity: ${cart.quantity}"
+            }
+        }
+    }
+
+    private class ShoppingListDiffCallback : DiffUtil.ItemCallback<UserCartUiData>() {
+        override fun areItemsTheSame(oldItem: UserCartUiData, newItem: UserCartUiData): Boolean {
+            return oldItem.id == newItem.id
         }
 
-        val cart = getItem(position)
-        val productNameTextView = view!!.findViewById<TextView>(R.id.itemNameTextView)
-        val productPriceTextView = view!!.findViewById<TextView>(R.id.itemPriceTextView)
-        val productId = view!!.findViewById<TextView>(R.id.itemId)
-        val productQuantity = view!!.findViewById<TextView>(R.id.itemQuantity)
-
-        if (cart != null) {
-            productNameTextView.text = cart.title
-            productPriceTextView.text = "${cart.price} TL"
-            productId.text = "Product Id: ${cart.id}"
-            productQuantity.text = "Quantity: ${cart.quantity}"
+        override fun areContentsTheSame(oldItem: UserCartUiData, newItem: UserCartUiData): Boolean {
+            return oldItem == newItem
         }
-
-        return view
     }
 }

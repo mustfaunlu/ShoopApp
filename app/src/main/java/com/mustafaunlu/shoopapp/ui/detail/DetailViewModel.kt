@@ -24,7 +24,7 @@ class DetailViewModel @Inject constructor(
     private val getSingleProductUseCase: GetSingleProductUseCase,
     private val cartUseCase: CartUseCase,
     private val cartmapper: ProductListMapper<UserCartEntity, UserCartUiData>,
-    private val mapper: ProductBaseMapper<SingleProductEntity, SingleProductUiData>
+    private val mapper: ProductBaseMapper<SingleProductEntity, SingleProductUiData>,
 ) : ViewModel() {
     private val _product = MutableLiveData<ScreenState<SingleProductUiData>>()
     val product: LiveData<ScreenState<SingleProductUiData>> get() = _product

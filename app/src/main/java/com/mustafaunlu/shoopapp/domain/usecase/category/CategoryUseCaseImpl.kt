@@ -6,7 +6,7 @@ import com.mustafaunlu.shoopapp.domain.repository.ProductRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class CategoryUseCaseImpl @Inject constructor(private val repository: ProductRepository): CategoryUseCase {
+class CategoryUseCaseImpl @Inject constructor(private val repository: ProductRepository) : CategoryUseCase {
     override fun invoke(): Flow<NetworkResponseState<List<String>>> {
         return repository.getAllCategories()
     }

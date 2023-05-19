@@ -30,16 +30,16 @@ class MainActivity : AppCompatActivity() {
             when (destination.id) {
                 R.id.homeFragment -> {
                     binding.myToolbar.visible()
-                    binding.myToolbar.title = "Products List"
+                    binding.myToolbar.title = getString(R.string.products_list_appbar_title)
                     binding.myToolbar.navigationIcon = null
                 }
                 R.id.productDetailFragment -> {
                     binding.myToolbar.visible()
-                    binding.myToolbar.title = "Product Detail"
+                    binding.myToolbar.title = getString(R.string.product_detail_appbar_title)
                 }
                 R.id.shoppingListFragment -> {
                     binding.myToolbar.visible()
-                    binding.myToolbar.title = "Your Shopping List"
+                    binding.myToolbar.title = getString(R.string.shopping_list_appbar_title)
                 }
                 else -> {
                     binding.myToolbar.gone()

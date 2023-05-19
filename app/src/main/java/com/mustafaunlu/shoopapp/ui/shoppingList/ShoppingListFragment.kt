@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.mustafaunlu.shoopapp.R
 import com.mustafaunlu.shoopapp.common.Constants.SHARED_PREF_DEF
 import com.mustafaunlu.shoopapp.common.Constants.SHARED_PREF_USERID_KEY
 import com.mustafaunlu.shoopapp.common.ScreenState
@@ -47,11 +46,9 @@ class ShoppingListFragment : Fragment() {
                 is ScreenState.Loading -> {
                 }
                 is ScreenState.Success -> {
-                    binding.cartListview.adapter = ShoppingListAdapter(
-                        requireContext(),
-                        R.layout.shopping_list_item,
-                        it.uiData,
-                    )
+                    binding.cartListview.adapter = ShoppingListAdapter().apply {
+                        submitList(it.uiData)
+                    }
                 }
             }
         }

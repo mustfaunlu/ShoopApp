@@ -1,7 +1,7 @@
 package com.mustafaunlu.shoopapp.di
 
-import com.mustafaunlu.shoopapp.domain.repository.ProductRepository
 import com.mustafaunlu.shoopapp.data.repository.ProductRepositoryImpl
+import com.mustafaunlu.shoopapp.domain.repository.ProductRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -10,11 +10,11 @@ import dagger.hilt.android.scopes.ViewModelScoped
 
 @Module
 @InstallIn(ViewModelComponent::class)
-abstract class LoginRepositoryModule {
+abstract class RepositoryModule {
 
     @Binds
     @ViewModelScoped
-    abstract fun bindLoginRepository(
+    abstract fun bindProductRepository(
         repository: ProductRepositoryImpl,
     ): ProductRepository
 }

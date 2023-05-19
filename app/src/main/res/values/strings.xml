@@ -20,4 +20,7 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="error">Error</string>
+    <string name="products_list_appbar_title">Products List</string>
+    <string name="product_detail_appbar_title">Product Detail</string>
+    <string name="shopping_list_appbar_title">Your Shopping List</string>
 </resources>

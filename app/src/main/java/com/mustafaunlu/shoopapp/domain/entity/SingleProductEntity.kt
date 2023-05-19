@@ -6,5 +6,5 @@ data class SingleProductEntity(
     val description: String,
     val price: String,
     val imageUrl: String,
-    val rating: String
+    val rating: String,
 )

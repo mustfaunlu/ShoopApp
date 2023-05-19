@@ -1,6 +1,5 @@
 package com.mustafaunlu.shoopapp.data.dto
 
-
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -13,5 +12,5 @@ data class UserCartResponse(
     @Json(name = "skip")
     val skip: Int,
     @Json(name = "total")
-    val total: Int
+    val total: Int,
 )

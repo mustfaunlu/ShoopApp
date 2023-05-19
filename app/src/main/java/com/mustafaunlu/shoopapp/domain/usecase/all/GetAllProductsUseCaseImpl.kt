@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class GetAllProductsUseCaseImpl @Inject constructor(
-    private val repository: ProductRepository
+    private val repository: ProductRepository,
 ) : GetAllProductsUseCase {
     override fun invoke(): Flow<NetworkResponseState<List<AllProductsEntity>>> = repository.getAllProducts()
 }
