@@ -1,5 +1,3 @@
-package com.mustafaunlu.shoopapp.ui.shoppingList
-
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,6 +6,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.mustafaunlu.shoopapp.common.UserCartUiData
 import com.mustafaunlu.shoopapp.databinding.ShoppingListItemBinding
+import com.mustafaunlu.shoopapp.utils.loadImage
 
 class ShoppingListAdapter : ListAdapter<UserCartUiData, ShoppingListAdapter.ShoppingListViewHolder>(ShoppingListDiffCallback()) {
 
@@ -27,7 +26,27 @@ class ShoppingListAdapter : ListAdapter<UserCartUiData, ShoppingListAdapter.Shop
                 itemNameTextView.text = cart.title
                 itemPriceTextView.text = "${cart.price} TL"
                 itemId.text = "Product Id: ${cart.id}"
-                itemQuantity.text = "Quantity: ${cart.quantity}"
+                itemQuantity.text = cart.quantity.toString()
+                imageView.loadImage(cart.imageUrl)
+            }
+            binding.incrementButton.setOnClickListener {
+                val updatedCart = cart.copy(quantity = cart.quantity + 1)
+                submitUpdatedCart(updatedCart)
+            }
+            binding.decrementButton.setOnClickListener {
+                if (cart.quantity > 1) {
+                    val updatedCart = cart.copy(quantity = cart.quantity - 1)
+                    submitUpdatedCart(updatedCart)
+                }
+            }
+        }
+
+        private fun submitUpdatedCart(updatedCart: UserCartUiData) {
+            val position = adapterPosition
+            if (position != RecyclerView.NO_POSITION) {
+                val newList = currentList.toMutableList()
+                newList[position] = updatedCart
+                submitList(newList)
             }
         }
     }

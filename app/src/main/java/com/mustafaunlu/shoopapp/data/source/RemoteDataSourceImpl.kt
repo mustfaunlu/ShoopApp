@@ -44,8 +44,8 @@ class RemoteDataSourceImpl @Inject constructor(
         return flow {
             try {
                 emit(NetworkResponseState.Loading)
-                val response = apiService.addToCart(cartRequest)
-                emit(NetworkResponseState.Success(response))
+               // val response = apiService.addToCart(cartRequest)
+               // emit(NetworkResponseState.Success(response))
             } catch (e: Exception) {
                 emit(NetworkResponseState.Error(e))
             }
@@ -92,8 +92,8 @@ class RemoteDataSourceImpl @Inject constructor(
         return flow {
             try {
                 emit(NetworkResponseState.Loading)
-                val response = apiService.getCartByUserId(userId)
-                emit(NetworkResponseState.Success(response))
+               // val response = apiService.getCartByUserId(userId)
+               // emit(NetworkResponseState.Success(response))
             } catch (e: Exception) {
                 emit(NetworkResponseState.Error(e))
             }

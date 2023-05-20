@@ -9,10 +9,12 @@ class UserCartEntityMapper @Inject constructor() : ProductListMapper<CartRespons
     override fun map(input: List<CartResponseProduct>): List<UserCartEntity> {
         return input.map {
             UserCartEntity(
-                id = it.id,
+                userId = 0,
+                productId = it.id,
                 price = it.price,
                 quantity = it.quantity,
                 title = it.title,
+                image = "",
             )
         }
     }

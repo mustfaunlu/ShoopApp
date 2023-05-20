@@ -1,5 +1,6 @@
 package com.mustafaunlu.shoopapp.ui.shoppingList
 
+import ShoppingListAdapter
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -30,8 +31,8 @@ class ShoppingListFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         binding = FragmentShoppingListBinding.inflate(inflater, container, false)
-        val userId = sharedPref.getString(SHARED_PREF_USERID_KEY, SHARED_PREF_DEF)
-        viewModel.getCartsByUserId(userId!!.toInt())
+        val userId = sharedPref.getString(SHARED_PREF_USERID_KEY, SHARED_PREF_DEF)!!
+        viewModel.getCartsByUserId(userId.toInt())
         return binding.root
     }
 

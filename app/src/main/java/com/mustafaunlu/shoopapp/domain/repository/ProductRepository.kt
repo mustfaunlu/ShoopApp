@@ -23,4 +23,8 @@ interface ProductRepository {
     fun getProductsByCategory(categoryName: String): Flow<NetworkResponseState<List<AllProductsEntity>>>
 
     fun getCartsByUserId(userId: Int): Flow<NetworkResponseState<List<UserCartEntity>>>
+
+    fun getCartsByUserIdFromLocal(userId: Int): Flow<NetworkResponseState<List<UserCartEntity>>>
+
+    suspend fun insertCartToDb(userCartEntity: UserCartEntity)
 }

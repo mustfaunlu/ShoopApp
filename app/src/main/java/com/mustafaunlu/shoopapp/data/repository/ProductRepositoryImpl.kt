@@ -6,6 +6,7 @@ import com.mustafaunlu.shoopapp.data.dto.CartResponseProduct
 import com.mustafaunlu.shoopapp.data.dto.Product
 import com.mustafaunlu.shoopapp.data.dto.User
 import com.mustafaunlu.shoopapp.data.dto.UserResponse
+import com.mustafaunlu.shoopapp.data.source.LocalDataSource
 import com.mustafaunlu.shoopapp.data.source.RemoteDataSource
 import com.mustafaunlu.shoopapp.di.IoDispatcher
 import com.mustafaunlu.shoopapp.domain.entity.AllProductsEntity
@@ -19,12 +20,14 @@ import com.mustafaunlu.shoopapp.utils.mapResponse
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class ProductRepositoryImpl @Inject constructor(
     private val remoteDataSource: RemoteDataSource,
+    private val localDataSource: LocalDataSource,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
     private val singleProductMapper: ProductBaseMapper<Product, SingleProductEntity>,
     private val allProductsMapper: ProductListMapper<Product, AllProductsEntity>,
@@ -86,4 +89,14 @@ class ProductRepositoryImpl @Inject constructor(
                 cartMapper.map(cartProducts)
             }
         }
+
+    override fun getCartsByUserIdFromLocal(userId: Int): Flow<NetworkResponseState<List<UserCartEntity>>> {
+        return flow {
+            emit(NetworkResponseState.Success(localDataSource.getCartByUserId(userId)))
+        }.flowOn(ioDispatcher)
+    }
+
+    override suspend fun insertCartToDb(userCartEntity: UserCartEntity) {
+        localDataSource.insertUserCart(userCartEntity)
+    }
 }

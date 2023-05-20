@@ -15,9 +15,8 @@ import com.mustafaunlu.shoopapp.R
 import com.mustafaunlu.shoopapp.common.Constants.SHARED_PREF_DEF
 import com.mustafaunlu.shoopapp.common.Constants.SHARED_PREF_USERID_KEY
 import com.mustafaunlu.shoopapp.common.ScreenState
-import com.mustafaunlu.shoopapp.data.dto.CartItem
-import com.mustafaunlu.shoopapp.data.dto.CartRequest
 import com.mustafaunlu.shoopapp.databinding.FragmentProductDetailBinding
+import com.mustafaunlu.shoopapp.domain.entity.UserCartEntity
 import com.mustafaunlu.shoopapp.utils.loadImage
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -28,8 +27,7 @@ class ProductDetailFragment : Fragment() {
     private lateinit var binding: FragmentProductDetailBinding
     private val detailViewModel: DetailViewModel by viewModels()
     private val args: ProductDetailFragmentArgs by navArgs()
-    private lateinit var cartRequest: CartRequest
-    private val listOfCartItem = mutableListOf<CartItem>()
+    private lateinit var userCart: UserCartEntity
 
     @Inject
     lateinit var sharedPref: SharedPreferences
@@ -52,8 +50,10 @@ class ProductDetailFragment : Fragment() {
             when (it) {
                 is ScreenState.Error -> {
                 }
+
                 is ScreenState.Loading -> {
                 }
+
                 is ScreenState.Success -> {
                     binding.apply {
                         productTitle.text = it.uiData.title
@@ -61,16 +61,25 @@ class ProductDetailFragment : Fragment() {
                         productDescription.text = it.uiData.description
                         productImg.loadImage(it.uiData.imageUrl)
                         productRating.text = "Rating ${it.uiData.rating}"
+
+                        val userId = sharedPref.getString(SHARED_PREF_USERID_KEY, SHARED_PREF_DEF)!!
+                        userCart = UserCartEntity(
+                            userId = userId.toInt(),
+                            productId = it.uiData.id,
+                            quantity = 1,
+                            price = it.uiData.price.toInt(),
+                            title = it.uiData.title,
+                            image = it.uiData.imageUrl,
+                        )
                     }
-                    listOfCartItem.add(CartItem(it.uiData.id, quantity = 1))
                 }
             }
         }
 
         binding.btnAddToCart.setOnClickListener {
-            cartRequest = CartRequest(listOfCartItem, userId = sharedPref.getString(SHARED_PREF_USERID_KEY, SHARED_PREF_DEF)!!.toInt())
-            detailViewModel.addToCart(cartRequest)
-            Toast.makeText(requireContext(), getString(R.string.added_to_cart), Toast.LENGTH_SHORT).show()
+            detailViewModel.addToCart(userCart)
+            Toast.makeText(requireContext(), getString(R.string.added_to_cart), Toast.LENGTH_SHORT)
+                .show()
         }
 
         binding.btnShoppingList.setOnClickListener {

@@ -27,6 +27,7 @@ data class UserCartUiData(
     val price: Int,
     val quantity: Int,
     val title: String,
+    val imageUrl: String,
 )
 
 data class UserUiData(
