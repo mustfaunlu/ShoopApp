@@ -1,13 +1,10 @@
-package com.mustafaunlu.shoopapp.data.source
+package com.mustafaunlu.shoopapp.data.source.remote
 
 import com.mustafaunlu.shoopapp.common.NetworkResponseState
 import com.mustafaunlu.shoopapp.data.api.ApiService
-import com.mustafaunlu.shoopapp.data.dto.CartRequest
-import com.mustafaunlu.shoopapp.data.dto.CartResponse
 import com.mustafaunlu.shoopapp.data.dto.Product
 import com.mustafaunlu.shoopapp.data.dto.Products
 import com.mustafaunlu.shoopapp.data.dto.User
-import com.mustafaunlu.shoopapp.data.dto.UserCartResponse
 import com.mustafaunlu.shoopapp.data.dto.UserResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -34,18 +31,6 @@ class RemoteDataSourceImpl @Inject constructor(
                 emit(NetworkResponseState.Loading)
                 val response = apiService.getProductsById(productId)
                 emit(NetworkResponseState.Success(response))
-            } catch (e: Exception) {
-                emit(NetworkResponseState.Error(e))
-            }
-        }
-    }
-
-    override fun addToCart(cartRequest: CartRequest): Flow<NetworkResponseState<CartResponse>> {
-        return flow {
-            try {
-                emit(NetworkResponseState.Loading)
-               // val response = apiService.addToCart(cartRequest)
-               // emit(NetworkResponseState.Success(response))
             } catch (e: Exception) {
                 emit(NetworkResponseState.Error(e))
             }
@@ -82,18 +67,6 @@ class RemoteDataSourceImpl @Inject constructor(
                 emit(NetworkResponseState.Loading)
                 val response = apiService.getProductsByCategory(categoryName)
                 emit(NetworkResponseState.Success(response))
-            } catch (e: Exception) {
-                emit(NetworkResponseState.Error(e))
-            }
-        }
-    }
-
-    override fun getCartsByUserId(userId: Int): Flow<NetworkResponseState<UserCartResponse>> {
-        return flow {
-            try {
-                emit(NetworkResponseState.Loading)
-               // val response = apiService.getCartByUserId(userId)
-               // emit(NetworkResponseState.Success(response))
             } catch (e: Exception) {
                 emit(NetworkResponseState.Error(e))
             }

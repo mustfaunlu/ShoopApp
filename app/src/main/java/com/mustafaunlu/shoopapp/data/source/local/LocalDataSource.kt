@@ -1,4 +1,4 @@
-package com.mustafaunlu.shoopapp.data.source
+package com.mustafaunlu.shoopapp.data.source.local
 
 import com.mustafaunlu.shoopapp.domain.entity.UserCartEntity
 

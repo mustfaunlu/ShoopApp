@@ -1,7 +1,7 @@
-package com.mustafaunlu.shoopapp.di
+package com.mustafaunlu.shoopapp.di.source
 
-import com.mustafaunlu.shoopapp.data.source.LocalDataSource
-import com.mustafaunlu.shoopapp.data.source.LocalDataSourceImpl
+import com.mustafaunlu.shoopapp.data.source.local.LocalDataSource
+import com.mustafaunlu.shoopapp.data.source.local.LocalDataSourceImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

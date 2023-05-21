@@ -1,4 +1,4 @@
-package com.mustafaunlu.shoopapp.di // ktlint-disable filename
+package com.mustafaunlu.shoopapp.di.sharedpref // ktlint-disable filename
 
 import android.content.Context
 import android.content.SharedPreferences

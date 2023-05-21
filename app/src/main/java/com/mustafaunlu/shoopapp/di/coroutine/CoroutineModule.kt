@@ -1,4 +1,4 @@
-package com.mustafaunlu.shoopapp.di
+package com.mustafaunlu.shoopapp.di.coroutine
 
 import dagger.Module
 import dagger.Provides

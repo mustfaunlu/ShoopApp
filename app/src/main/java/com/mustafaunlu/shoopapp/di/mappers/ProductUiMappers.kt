@@ -1,4 +1,4 @@
-package com.mustafaunlu.shoopapp.di
+package com.mustafaunlu.shoopapp.di.mappers
 
 import com.mustafaunlu.shoopapp.common.AllProductsUiData
 import com.mustafaunlu.shoopapp.common.SingleProductUiData

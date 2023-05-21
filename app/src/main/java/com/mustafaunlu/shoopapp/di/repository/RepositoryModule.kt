@@ -1,4 +1,4 @@
-package com.mustafaunlu.shoopapp.di
+package com.mustafaunlu.shoopapp.di.repository
 
 import com.mustafaunlu.shoopapp.data.repository.ProductRepositoryImpl
 import com.mustafaunlu.shoopapp.domain.repository.ProductRepository

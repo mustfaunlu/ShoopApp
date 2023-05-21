@@ -1,4 +1,4 @@
-package com.mustafaunlu.shoopapp.di
+package com.mustafaunlu.shoopapp.di.database
 
 import android.content.Context
 import androidx.room.Room

@@ -1,4 +1,4 @@
-package com.mustafaunlu.shoopapp.di
+package com.mustafaunlu.shoopapp.di.usecase
 
 import com.mustafaunlu.shoopapp.domain.usecase.all.GetAllProductsUseCase
 import com.mustafaunlu.shoopapp.domain.usecase.all.GetAllProductsUseCaseImpl

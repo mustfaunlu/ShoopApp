@@ -1,4 +1,4 @@
-package com.mustafaunlu.shoopapp.di
+package com.mustafaunlu.shoopapp.di.mappers
 
 import com.mustafaunlu.shoopapp.data.dto.CartResponseProduct
 import com.mustafaunlu.shoopapp.data.dto.Product

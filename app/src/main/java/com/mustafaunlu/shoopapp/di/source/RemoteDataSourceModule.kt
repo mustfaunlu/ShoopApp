@@ -1,7 +1,7 @@
-package com.mustafaunlu.shoopapp.di
+package com.mustafaunlu.shoopapp.di.source
 
-import com.mustafaunlu.shoopapp.data.source.RemoteDataSource
-import com.mustafaunlu.shoopapp.data.source.RemoteDataSourceImpl
+import com.mustafaunlu.shoopapp.data.source.remote.RemoteDataSource
+import com.mustafaunlu.shoopapp.data.source.remote.RemoteDataSourceImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
