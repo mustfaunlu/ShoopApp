@@ -1,14 +1,13 @@
 package com.mustafaunlu.shoopapp.data.repository
 
 import com.mustafaunlu.shoopapp.common.NetworkResponseState
-import com.mustafaunlu.shoopapp.data.dto.CartRequest
 import com.mustafaunlu.shoopapp.data.dto.CartResponseProduct
 import com.mustafaunlu.shoopapp.data.dto.Product
 import com.mustafaunlu.shoopapp.data.dto.User
 import com.mustafaunlu.shoopapp.data.dto.UserResponse
-import com.mustafaunlu.shoopapp.data.source.LocalDataSource
-import com.mustafaunlu.shoopapp.data.source.RemoteDataSource
-import com.mustafaunlu.shoopapp.di.IoDispatcher
+import com.mustafaunlu.shoopapp.data.source.local.LocalDataSource
+import com.mustafaunlu.shoopapp.data.source.remote.RemoteDataSource
+import com.mustafaunlu.shoopapp.di.coroutine.IoDispatcher
 import com.mustafaunlu.shoopapp.domain.entity.AllProductsEntity
 import com.mustafaunlu.shoopapp.domain.entity.SingleProductEntity
 import com.mustafaunlu.shoopapp.domain.entity.UserCartEntity
@@ -39,22 +38,14 @@ class ProductRepositoryImpl @Inject constructor(
             it.mapResponse {
                 allProductsMapper.map(products)
             }
-        }
+        }.flowOn(ioDispatcher)
 
     override fun getProductById(productId: Int): Flow<NetworkResponseState<SingleProductEntity>> =
         remoteDataSource.getProductById(productId).map {
             it.mapResponse {
                 singleProductMapper.map(this)
             }
-        }
-
-    override fun addToCart(cartRequest: CartRequest): Flow<NetworkResponseState<List<UserCartEntity>>> {
-        return remoteDataSource.addToCart(cartRequest).map { cartResponse ->
-            cartResponse.mapResponse {
-                cartMapper.map(products)
-            }
-        }
-    }
+        }.flowOn(ioDispatcher)
 
     override fun login(user: User): Flow<NetworkResponseState<UserResponseEntity>> {
         return remoteDataSource.login(user).map {
@@ -69,26 +60,15 @@ class ProductRepositoryImpl @Inject constructor(
             it.mapResponse {
                 this
             }
-        }
+        }.flowOn(ioDispatcher)
 
     override fun getProductsByCategory(categoryName: String): Flow<NetworkResponseState<List<AllProductsEntity>>> {
         return remoteDataSource.getProductsByCategory(categoryName).map {
             it.mapResponse {
                 allProductsMapper.map(products)
             }
-        }
+        }.flowOn(ioDispatcher)
     }
-
-    override fun getCartsByUserId(userId: Int): Flow<NetworkResponseState<List<UserCartEntity>>> =
-        remoteDataSource.getCartsByUserId(userId).map {
-            var cartProducts: List<CartResponseProduct> = listOf()
-            it.mapResponse {
-                this.carts.forEach { cart ->
-                    cartProducts = cart.products
-                }
-                cartMapper.map(cartProducts)
-            }
-        }
 
     override fun getCartsByUserIdFromLocal(userId: Int): Flow<NetworkResponseState<List<UserCartEntity>>> {
         return flow {
