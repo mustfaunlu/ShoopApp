@@ -11,10 +11,15 @@ An dummy shopping app for teaching how to use MVVM + Clean Architecture
 
 ## Screenshots
 <p align="center">
-<img src="/previews/home_.png" width="20%"/>
-<img src="/previews/home_.png" width="20%"/>
-<img src="/previews/detail_.png" width="20%"/>
-<img src="/previews/detail_.png" width="20%"/>
+<img src="/previews/login-screen.png" width="20%"/>
+<img src="/previews/login-screen-loading.png" width="20%"/>
+<img src="/previews/product-list-screen.png" width="20%"/>
+<img src="/previews/product-list-screen-1.png" width="20%"/>
+<img src="/previews/category-screen.png" width="20%"/>
+<img src="/previews/product-detail-screen.png" width="20%"/>
+<img src="/previews/add-to-cart.png" width="20%"/>
+<img src="/previews/shopping-list.png" width="20%"/>
+<img src="/previews/shopping-list-1.png" width="20%"/>
 
 </p>
 
@@ -32,6 +37,7 @@ An dummy shopping app for teaching how to use MVVM + Clean Architecture
 - [OkHttp](https://square.github.io/okhttp/) An HTTP client that efficiently make network requests
 - [Glide](https://github.com/bumptech/glide) An image loading and caching library for Android focused on smooth scrolling
 - [Moshi](https://github.com/square/moshi) Moshi is a modern JSON library for Android, Java and Kotlin. It makes it easy to parse JSON into Java and Kotlin classes.
+- [Room](https://developer.android.com/training/data-storage/room) The Room persistence library provides an abstraction layer over SQLite to allow for more robust database access while harnessing the full power of SQLite.
 
 ## Architecture
 This app uses [***MVVM (Model View View-Model)***](https://developer.android.com/jetpack/docs/guide#recommended-app-arch) architecture
