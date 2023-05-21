@@ -1,6 +1,6 @@
 <h1 align="center">ShoopApp</h1></br>
 <p align="center">  
-An dummy shopping app for teaching how to use MVVM + Clean Architecture
+A dummy shopping app for teaching how to use MVVM + Clean Architecture
 </p></br>
 
 <p align="center">
@@ -44,3 +44,5 @@ This app uses [***MVVM (Model View View-Model)***](https://developer.android.com
 
 ![](https://user-images.githubusercontent.com/21035435/69536839-9f4c8e80-0fa0-11ea-85ee-d7823e5a46b0.png)
 
+## API
+ShoopApp uses [DummyJson](https://dummyjson.com/) With FakeProductsAPI, what you get is different types of REST Endpoints filled with JSON data which you can use in developing the frontend with your favorite framework and library without worrying about writing a backend.
