@@ -14,7 +14,7 @@ import com.mustafaunlu.shoopapp.common.Constants.SHARED_PREF_CHECKBOX_KEY
 import com.mustafaunlu.shoopapp.common.Constants.SHARED_PREF_DEF
 import com.mustafaunlu.shoopapp.common.Constants.SHARED_PREF_USERID_KEY
 import com.mustafaunlu.shoopapp.common.Constants.SHARED_PREF_USERNAME_KEY
-import com.mustafaunlu.shoopapp.common.NetworkResponseState
+import com.mustafaunlu.shoopapp.common.ScreenState
 import com.mustafaunlu.shoopapp.data.dto.User
 import com.mustafaunlu.shoopapp.databinding.FragmentLoginBinding
 import com.mustafaunlu.shoopapp.utils.safeNavigate
@@ -69,7 +69,7 @@ class LoginFragment : Fragment() {
         val password = binding.password.text.toString().trim()
 
         if (username.isBlank() || password.isBlank()) {
-            Toast.makeText(requireContext(), "Please not blanks!", Toast.LENGTH_SHORT)
+            Toast.makeText(requireContext(), getString(R.string.please_not_blanks), Toast.LENGTH_SHORT)
                 .show()
             return
         }
@@ -78,34 +78,36 @@ class LoginFragment : Fragment() {
 
         viewModel.loginState.observe(viewLifecycleOwner) { loginState ->
             when (loginState) {
-                is NetworkResponseState.Loading -> {
+                is ScreenState.Loading -> {
                     binding.loading.visibility = View.VISIBLE
                     binding.loginBtn.isEnabled = false
                 }
 
-                is NetworkResponseState.Success -> {
+                is ScreenState.Success -> {
                     binding.loading.visibility = View.GONE
                     binding.loginBtn.isEnabled = true
                     findNavController().safeNavigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
                     Toast.makeText(
                         requireContext(),
-                        "Welcome ${loginState.result.username}",
+                        "Welcome ${loginState.uiData.username}",
                         Toast.LENGTH_SHORT,
                     ).show()
                     sharedPref.edit()
-                        .putString(SHARED_PREF_USERID_KEY, loginState.result.id.toString())
+                        .putString(SHARED_PREF_USERID_KEY, loginState.uiData.id.toString())
                         .apply()
                 }
 
-                is NetworkResponseState.Error -> {
+                is ScreenState.Error -> {
                     binding.loading.visibility = View.GONE
                     binding.loginBtn.isEnabled = true
                     Toast.makeText(
                         requireContext(),
-                        "${loginState.exception.message}",
+                        getString(R.string.check_username_pass),
                         Toast.LENGTH_SHORT,
                     ).show()
                 }
+
+                else -> {}
             }
         }
     }
