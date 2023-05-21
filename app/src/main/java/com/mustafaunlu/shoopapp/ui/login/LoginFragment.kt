@@ -11,8 +11,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.mustafaunlu.shoopapp.R
 import com.mustafaunlu.shoopapp.common.Constants.SHARED_PREF_CHECKBOX_KEY
-import com.mustafaunlu.shoopapp.common.Constants.SHARED_PREF_DEF
 import com.mustafaunlu.shoopapp.common.Constants.SHARED_PREF_USERID_KEY
+import com.mustafaunlu.shoopapp.common.Constants.SHARED_PREF_USERNAME_DEF
 import com.mustafaunlu.shoopapp.common.Constants.SHARED_PREF_USERNAME_KEY
 import com.mustafaunlu.shoopapp.common.ScreenState
 import com.mustafaunlu.shoopapp.data.dto.User
@@ -36,7 +36,7 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         binding = FragmentLoginBinding.bind(inflater.inflate(R.layout.fragment_login, container, false))
-        val savedUsername = sharedPref.getString(SHARED_PREF_USERNAME_KEY, SHARED_PREF_DEF)
+        val savedUsername = sharedPref.getString(SHARED_PREF_USERNAME_KEY, SHARED_PREF_USERNAME_DEF)
         if (savedUsername != null) {
             binding.username.setText(savedUsername)
         }
