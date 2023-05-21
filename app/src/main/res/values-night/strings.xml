@@ -10,4 +10,6 @@
     <string name="products_list_appbar_title">Products List</string>
     <string name="product_detail_appbar_title">Product Detail</string>
     <string name="shopping_list_appbar_title">Your Shopping List</string>
+    <string name="check_username_pass">Please check your username and password!</string>
+    <string name="please_not_blanks">Please not blanks!</string>
 </resources>
