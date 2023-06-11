@@ -20,7 +20,11 @@ A dummy shopping app for teaching how to use MVVM + Clean Architecture
 <img src="/previews/add-to-cart.png" width="20%"/>
 <img src="/previews/shopping-list.png" width="20%"/>
 <img src="/previews/shopping-list-1.png" width="20%"/>
+</p>
 
+## App Gif
+<p align="center">
+<img src="/previews/app.gif" width="30%"/>
 </p>
 
 ## Tech stack & Open-source libraries
