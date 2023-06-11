@@ -4,6 +4,8 @@ import com.mustafaunlu.shoopapp.domain.usecase.all.GetAllProductsUseCase
 import com.mustafaunlu.shoopapp.domain.usecase.all.GetAllProductsUseCaseImpl
 import com.mustafaunlu.shoopapp.domain.usecase.cart.CartUseCase
 import com.mustafaunlu.shoopapp.domain.usecase.cart.CartUseCaseImpl
+import com.mustafaunlu.shoopapp.domain.usecase.cart.delete_cart.DeleteUserCartUseCase
+import com.mustafaunlu.shoopapp.domain.usecase.cart.delete_cart.DeleteUserCartUseCaseImpl
 import com.mustafaunlu.shoopapp.domain.usecase.category.CategoryUseCase
 import com.mustafaunlu.shoopapp.domain.usecase.category.CategoryUseCaseImpl
 import com.mustafaunlu.shoopapp.domain.usecase.single.GetSingleProductUseCase
@@ -49,4 +51,10 @@ abstract class UseCaseModule {
     abstract fun bindUserUseCase(
         userUseCaseImpl: UserUseCaseImpl,
     ): UserUseCase
+
+    @Binds
+    @ViewModelScoped
+    abstract fun bindDeleteUserCartUseCase(
+        deleteUserCartUseCaseImpl: DeleteUserCartUseCaseImpl,
+    ): DeleteUserCartUseCase
 }
