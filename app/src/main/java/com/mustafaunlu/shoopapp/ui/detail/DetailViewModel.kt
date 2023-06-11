@@ -15,7 +15,6 @@ import com.mustafaunlu.shoopapp.domain.mapper.ProductListMapper
 import com.mustafaunlu.shoopapp.domain.usecase.cart.CartUseCase
 import com.mustafaunlu.shoopapp.domain.usecase.single.GetSingleProductUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -42,7 +41,7 @@ class DetailViewModel @Inject constructor(
     }
 
     fun addToCart(userCartEntity: UserCartEntity) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             cartUseCase(userCartEntity)
         }
     }
