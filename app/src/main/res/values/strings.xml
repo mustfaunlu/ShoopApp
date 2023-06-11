@@ -25,4 +25,6 @@
     <string name="shopping_list_appbar_title">Your Shopping List</string>
     <string name="check_username_pass">Please check your username and password!</string>
     <string name="please_not_blanks">Please not blanks!</string>
+    <string name="shopping_list_delete_warn">Are you sure you want to delete this product from cart?</string>
+    <string name="shopping_list_item_deleted_txt">Product deleted from cart.</string>
 </resources>
