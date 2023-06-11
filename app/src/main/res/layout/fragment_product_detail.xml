@@ -4,10 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
+    android:layout_marginTop="?actionBarSize"
     app:cardCornerRadius="8dp"
     app:cardElevation="10dp"
-    android:layout_gravity="center"
     app:cardUseCompatPadding="true">
 
     <LinearLayout
@@ -63,7 +62,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/my_shopping_list"
-            android:layout_margin="5dp"/>
+            android:layout_margin="5dp" />
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>
