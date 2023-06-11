@@ -1,6 +1,6 @@
 <h1 align="center">ShoopApp</h1></br>
 <p align="center">  
-A dummy shopping app for teaching how to use MVVM + Clean Architecture
+A dummy shopping app for learning how to use MVVM + Clean Architecture
 </p></br>
 
 <p align="center">
