@@ -8,8 +8,10 @@ import com.mustafaunlu.shoopapp.common.NetworkResponseState
 import com.mustafaunlu.shoopapp.common.ScreenState
 import com.mustafaunlu.shoopapp.common.UserCartUiData
 import com.mustafaunlu.shoopapp.domain.entity.UserCartEntity
+import com.mustafaunlu.shoopapp.domain.mapper.ProductBaseMapper
 import com.mustafaunlu.shoopapp.domain.mapper.ProductListMapper
 import com.mustafaunlu.shoopapp.domain.usecase.cart.CartUseCase
+import com.mustafaunlu.shoopapp.domain.usecase.cart.delete_cart.DeleteUserCartUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -17,7 +19,9 @@ import javax.inject.Inject
 @HiltViewModel
 class ShoppingListViewModel @Inject constructor(
     private val cartUseCase: CartUseCase,
+    private val deleteCartUseCase: DeleteUserCartUseCase,
     private val mapper: ProductListMapper<UserCartEntity, UserCartUiData>,
+    private val singleMapper: ProductBaseMapper<UserCartUiData, UserCartEntity>,
 ) : ViewModel() {
     private val _userCarts = MutableLiveData<ScreenState<List<UserCartUiData>>>()
     val userCarts: LiveData<ScreenState<List<UserCartUiData>>> get() = _userCarts
@@ -31,6 +35,11 @@ class ShoppingListViewModel @Inject constructor(
                     is NetworkResponseState.Success -> _userCarts.postValue(ScreenState.Success(mapper.map(it.result)))
                 }
             }
+        }
+    }
+    fun deleteUserCartItem(userCartUiData: UserCartUiData) {
+        viewModelScope.launch() {
+            deleteCartUseCase(singleMapper.map(userCartUiData))
         }
     }
 }

@@ -22,6 +22,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class ProductRepositoryImpl @Inject constructor(
@@ -77,6 +78,14 @@ class ProductRepositoryImpl @Inject constructor(
     }
 
     override suspend fun insertCartToDb(userCartEntity: UserCartEntity) {
-        localDataSource.insertUserCart(userCartEntity)
+        withContext(ioDispatcher) {
+            localDataSource.insertUserCart(userCartEntity)
+        }
+    }
+
+    override suspend fun deleteUserCartItem(userCartEntity: UserCartEntity) {
+        withContext(ioDispatcher) {
+            localDataSource.deleteUserCartItem(userCartEntity)
+        }
     }
 }

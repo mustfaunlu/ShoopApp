@@ -5,6 +5,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.removeItemAt
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.mustafaunlu.shoopapp.databinding.ActivityMainBinding
@@ -39,6 +40,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.shoppingListFragment -> {
                     binding.myToolbar.visible()
+                    binding.myToolbar.menu.removeItemAt(0)
                     binding.myToolbar.title = getString(R.string.shopping_list_appbar_title)
                 }
                 else -> {

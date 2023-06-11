@@ -14,6 +14,7 @@ import com.mustafaunlu.shoopapp.ui.detail.ProductDetailUiMapper
 import com.mustafaunlu.shoopapp.ui.home.ProductHomeUiMapper
 import com.mustafaunlu.shoopapp.ui.login.UserUiMapper
 import com.mustafaunlu.shoopapp.ui.shoppingList.CartUiMapper
+import com.mustafaunlu.shoopapp.ui.shoppingList.SingleCartUiMapper
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -33,9 +34,13 @@ abstract class ProductUiMappers {
 
     @Binds
     @ViewModelScoped
-    abstract fun bindCartUiMapper(productUiDataMapper: CartUiMapper): ProductListMapper<UserCartEntity, UserCartUiData>
+    abstract fun bindCartUiMapper(cartUiDataMapper: CartUiMapper): ProductListMapper<UserCartEntity, UserCartUiData>
 
     @Binds
     @ViewModelScoped
-    abstract fun bindUserUiMapper(productUiDataMapper: UserUiMapper): ProductBaseMapper<UserResponseEntity, UserUiData>
+    abstract fun bindSingleCartUiMapper(singleCartUiDataMapper: SingleCartUiMapper): ProductBaseMapper<UserCartUiData, UserCartEntity>
+
+    @Binds
+    @ViewModelScoped
+    abstract fun bindUserUiMapper(userUiDataMapper: UserUiMapper): ProductBaseMapper<UserResponseEntity, UserUiData>
 }

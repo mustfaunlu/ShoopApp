@@ -22,4 +22,6 @@ interface ProductRepository {
     fun getCartsByUserIdFromLocal(userId: Int): Flow<NetworkResponseState<List<UserCartEntity>>>
 
     suspend fun insertCartToDb(userCartEntity: UserCartEntity)
+
+    suspend fun deleteUserCartItem(userCartEntity: UserCartEntity)
 }

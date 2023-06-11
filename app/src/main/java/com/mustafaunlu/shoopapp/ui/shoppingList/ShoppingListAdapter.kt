@@ -8,7 +8,7 @@ import com.mustafaunlu.shoopapp.common.UserCartUiData
 import com.mustafaunlu.shoopapp.databinding.ShoppingListItemBinding
 import com.mustafaunlu.shoopapp.utils.loadImage
 
-class ShoppingListAdapter : ListAdapter<UserCartUiData, ShoppingListAdapter.ShoppingListViewHolder>(ShoppingListDiffCallback()) {
+class ShoppingListAdapter(private val onItemLongClicked: (UserCartUiData) -> Unit) : ListAdapter<UserCartUiData, ShoppingListAdapter.ShoppingListViewHolder>(ShoppingListDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShoppingListViewHolder {
         val binding = ShoppingListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -18,7 +18,6 @@ class ShoppingListAdapter : ListAdapter<UserCartUiData, ShoppingListAdapter.Shop
     override fun onBindViewHolder(holder: ShoppingListViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
-
     inner class ShoppingListViewHolder(private val binding: ShoppingListItemBinding) : RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
         fun bind(cart: UserCartUiData) {
@@ -38,6 +37,11 @@ class ShoppingListAdapter : ListAdapter<UserCartUiData, ShoppingListAdapter.Shop
                     val updatedCart = cart.copy(quantity = cart.quantity - 1)
                     submitUpdatedCart(updatedCart)
                 }
+            }
+
+            binding.root.setOnLongClickListener {
+                onItemLongClicked(cart)
+                true
             }
         }
 
