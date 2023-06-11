@@ -6,4 +6,6 @@ interface LocalDataSource {
     suspend fun getCartByUserId(userId: Int): List<UserCartEntity>
 
     suspend fun insertUserCart(userCartEntity: UserCartEntity)
+
+    suspend fun deleteUserCartItem(userCartEntity: UserCartEntity)
 }

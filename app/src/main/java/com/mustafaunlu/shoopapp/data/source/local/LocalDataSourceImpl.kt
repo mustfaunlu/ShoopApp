@@ -12,4 +12,8 @@ class LocalDataSourceImpl @Inject constructor(private val cartDao: CartDao) : Lo
     override suspend fun insertUserCart(userCartEntity: UserCartEntity) {
         cartDao.insertUserCart(userCartEntity)
     }
+
+    override suspend fun deleteUserCartItem(userCartEntity: UserCartEntity) {
+        cartDao.deleteUserCartItem(userCartEntity)
+    }
 }
